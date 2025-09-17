@@ -425,34 +425,13 @@ export default function VideoMeetComponent() {
     setScreen(!screen);
   };
 
-//   let handleEndCall = () => {
-//     try {
-//       let tracks = localVideoref.current.srcObject.getTracks();
-//       tracks.forEach((track) => track.stop());
-//     } catch (e) {}
-// window.location.href = "https://meetmaster-zoom-frontend.onrender.com/auth";
-//   };
-let handleEndCall = () => {
-  // Stop all local tracks
-  if (localVideoref.current && localVideoref.current.srcObject) {
-    localVideoref.current.srcObject.getTracks().forEach(track => track.stop());
-    localVideoref.current.srcObject = null;
-  }
-
-  // Disconnect all WebRTC peer connections
-  for (let id in connections) {
-    connections[id].close();
-    delete connections[id];
-  }
-
-  // Disconnect socket
-  if (socketRef.current) {
-    socketRef.current.disconnect();
-  }
-
-  // Navigate to auth page
-  window.location.href = "/auth"; // Relative path is safer
-};
+  let handleEndCall = () => {
+    try {
+      let tracks = localVideoref.current.srcObject.getTracks();
+      tracks.forEach((track) => track.stop());
+    } catch (e) {}
+    navigate("/auth");
+  };
 
   let openChat = () => {
     setModal(true);
