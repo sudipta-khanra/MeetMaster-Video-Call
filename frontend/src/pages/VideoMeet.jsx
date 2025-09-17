@@ -453,7 +453,7 @@ export default function VideoMeetComponent() {
     socketRef.current?.disconnect();
 
     // Navigate using React Router
-    navigate("/home");
+navigate("/auth", { replace: true });
   };
   let openChat = () => {
     setModal(true);
