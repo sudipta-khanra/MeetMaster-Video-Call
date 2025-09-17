@@ -12,6 +12,12 @@ import ScreenShareIcon from "@mui/icons-material/ScreenShare";
 import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import ChatIcon from "@mui/icons-material/Chat";
 import server from "../environment";
+import { useNavigate } from "react-router-dom";
+
+
+
+  const navigate = useNavigate();
+
 const server_url = server;
 var connections = {};
 const peerConfigConnections = {
@@ -425,14 +431,29 @@ export default function VideoMeetComponent() {
     setScreen(!screen);
   };
 
-  let handleEndCall = () => {
-    try {
-      let tracks = localVideoref.current.srcObject.getTracks();
-      tracks.forEach((track) => track.stop());
-    } catch (e) {}
+  // let handleEndCall = () => {
+  //   try {
+  //     let tracks = localVideoref.current.srcObject.getTracks();
+  //     tracks.forEach((track) => track.stop());
+  //   } catch (e) {}
+  //   navigate("/auth");
+  // };
+  const handleEndCall = () => {
+    // Stop local media tracks
+    if (localVideoref.current?.srcObject) {
+      localVideoref.current.srcObject.getTracks().forEach(track => track.stop());
+      localVideoref.current.srcObject = null;
+    }
+
+    // Close all peer connections
+    for (let id in connections) connections[id].close();
+
+    // Disconnect socket
+    socketRef.current?.disconnect();
+
+    // Navigate using React Router
     navigate("/auth");
   };
-
   let openChat = () => {
     setModal(true);
     setNewMessages(0);
