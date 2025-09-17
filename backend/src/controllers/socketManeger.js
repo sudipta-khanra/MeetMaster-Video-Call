@@ -5,13 +5,16 @@ let timeLine = {};
 
 export const connectToSocket = (server) => {
   const io = new Server(server, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-      allowedHeaders: ["*"],
-      credentials: true,
-    },
-  });
+  cors: {
+    origin: [
+      "http://localhost:3000", // React local dev
+      "https://meetmaster-zoom-frontend.onrender.com", // deployed frontend
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+
 
   io.on("connection", (socket) => {
     console.log("something is connected");
