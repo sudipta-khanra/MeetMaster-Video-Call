@@ -430,7 +430,7 @@ export default function VideoMeetComponent() {
       let tracks = localVideoref.current.srcObject.getTracks();
       tracks.forEach((track) => track.stop());
     } catch (e) {}
-    window.location.href = "/home";
+window.location.href = "https://meetmaster-zoom-frontend.onrender.com/auth";
   };
 
   let openChat = () => {
