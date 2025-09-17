@@ -1,0 +1,200 @@
+.meetVideoContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #0b0c2b;
+  color: white;
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ------------------------------------------- */
+/* Local user's video (small floating preview) */
+/* ------------------------------------------- */
+.meetUserVideo {
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  border-radius: 12px;
+  border: 2px solid #4f46e5;
+  object-fit: cover;
+  z-index: 90;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------------------------- */
+/* Bottom control buttons (mic, camera, chat) */
+/* ------------------------------------------- */
+.buttonContainers {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 50px;
+  align-items: center;
+  z-index: 100;
+}
+
+.buttonContainers svg {
+  font-size: 2rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.buttonContainers svg:hover {
+  transform: scale(1.2);
+  color: #6366f1;
+}
+
+/* ------------------------------------------- */
+/* Participant videos grid */
+/* ------------------------------------------- */
+.conferenceView {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+  margin-top: 1rem;
+  padding-bottom: 120px;
+}
+
+.conferenceView video {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  border: 2px solid #6366f1;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.conferenceView video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+/* ------------------------------------------- */
+/* Chat modal on the right (white background) */
+/* ------------------------------------------- */
+.chatRoom {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 350px;
+  height: 80%;
+  background: white;
+  color: black;
+  border-left: 2px solid #6366f1;
+  border-radius: 12px 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+.chatContainer h1 {
+  margin-bottom: 1rem;
+  color: #6366f1;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.chattingDisplay {
+  flex: 1;
+  overflow-y: auto;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.chattingDisplay p {
+  margin: 0.2rem 0;
+}
+
+.chattingArea {
+  display: flex;
+  gap: 10px;
+}
+
+.chattingArea input {
+  flex: 1;
+  background: #e5e5e5;
+  color: black;
+  border-radius: 6px;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ------------------------------------------- */
+/* MUI Button & Badge styling */
+/* ------------------------------------------- */
+.MuiButton-root {
+  background-color: #6366f1;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.MuiButton-root:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+}
+
+.MuiBadge-badge {
+  background-color: #f59e0b;
+  color: #000;
+}
+
+/* ------------------------------------------- */
+/* Chat scrollbar styling */
+/* ------------------------------------------- */
+.chattingDisplay::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chattingDisplay::-webkit-scrollbar-thumb {
+  background-color: #6366f1;
+  border-radius: 3px;
+}
+
+.chattingDisplay::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* ------------------------------------------- */
+/* Responsive adjustments */
+/* ------------------------------------------- */
+@media (max-width: 768px) {
+  .meetUserVideo {
+    width: 150px;
+    height: 100px;
+    bottom: 60px;
+    left: 10px;
+  }
+
+  .conferenceView {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 8px;
+  }
+
+  .chatRoom {
+    width: 80%;
+    height: 70%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

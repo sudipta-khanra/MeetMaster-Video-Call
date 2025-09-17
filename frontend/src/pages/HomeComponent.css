@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navBar h2 {
+  font-size: 1.8rem;
+  color: #ff9839;
+  font-weight: bold;
+}
+
+.navBar div p {
+  margin-left: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.navBar div p:hover {
+  color: #ffa14b;
+}
+
+.navBar button {
+  margin-left: 1rem;
+  background: #ff9839;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 0.5rem 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.navBar button:hover {
+  background: #ffa14b;
+  transform: translateY(-2px);
+}
+
+.meetContainer {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 70px);
+  padding: 4rem 5%;
+  gap: 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  justify-content: center;
+}
+
+.leftPanel {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.leftPanel h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.leftPanel .MuiTextField-root {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  input {
+    color: white;
+  }
+}
+
+.leftPanel .MuiButton-root {
+  background: #ff9839;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.leftPanel .MuiButton-root:hover {
+  background: #ffa14b;
+  transform: translateY(-2px);
+}
+
+.rightPanel {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightPanel img {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .meetContainer {
+    flex-direction: column-reverse;
+    padding: 2rem;
+  }
+
+  .rightPanel img {
+    max-width: 80%;
+    margin-bottom: 2rem;
+  }
+
+  .leftPanel h2 {
+    font-size: 1.6rem;
+  }
+}
