@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 
 
 
-  const navigate = useNavigate();
 
 const server_url = server;
 var connections = {};
@@ -24,6 +23,8 @@ const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
 };
 export default function VideoMeetComponent() {
+    const navigate = useNavigate();
+
   var socketRef = useRef();
   let socketIdRef = useRef();
   let localVideoref = useRef();
