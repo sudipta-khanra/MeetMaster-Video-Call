@@ -15,7 +15,6 @@ import './Authentication.css';
 const defaultTheme = createTheme();
 
 export default function Authentication() {
-  // ✅ FIX 1: initialize as empty strings
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
@@ -26,7 +25,9 @@ export default function Authentication() {
 
   const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
-  const handleAuth = async () => {
+  const handleAuth = async (e) => {
+    if (e) e.preventDefault();
+
     try {
       setError('');
 
@@ -90,16 +91,16 @@ export default function Authentication() {
               </Button>
             </div>
 
-            <Box component="form" noValidate>
+            <Box component="form" noValidate onSubmit={handleAuth}>
               {formState === 1 && (
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  id="full-name" // ✅ FIX 2
+                  id="full-name"
                   label="Full Name"
                   value={name}
-                  name="name" // ✅ FIX 3
+                  name="name"
                   autoFocus
                   onChange={(e) => setName(e.target.value)}
                   className="auth-input"
@@ -114,7 +115,7 @@ export default function Authentication() {
                 label="Username"
                 value={username}
                 name="username"
-                autoFocus={formState === 0} // ✅ FIX 4
+                autoFocus={formState === 0}
                 onChange={(e) => setUsername(e.target.value)}
                 className="auth-input"
               />
@@ -136,11 +137,10 @@ export default function Authentication() {
               <p className="auth-error">{error}</p>
 
               <Button
-                type="button"
+                type="submit"
                 fullWidth
                 variant="contained"
                 className="auth-submit-button"
-                onClick={handleAuth}
               >
                 {formState === 0 ? 'Sign In' : 'Register'}
               </Button>

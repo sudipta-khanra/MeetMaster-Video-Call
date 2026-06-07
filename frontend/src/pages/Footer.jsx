@@ -1,12 +1,16 @@
-import React from "react";
-import Logo from "../assets/logo3.svg";
-import "./Footer.css";
+import React from 'react';
+import Logo from '../assets/logo3.svg';
+import './Footer.css';
 
 const Footer = () => {
   return (
     <footer>
       <div className="container">
         <div className="download-section">
+          <div className="footer-logo-container">
+            <img src={Logo} alt="MeetMaster Logo" className="footer-logo" />
+          </div>
+
           <div className="download-header">
             <div className="download-icon">⬇</div>
             <div>
@@ -14,7 +18,8 @@ const Footer = () => {
               <p>Get the most out of MeetMaster</p>
             </div>
           </div>
-          <select>
+
+          <select aria-label="Select Language">
             <option>English</option>
             <option>Spanish</option>
             <option>French</option>
@@ -35,7 +40,8 @@ const Footer = () => {
             <option>Vietnamese</option>
             <option>Indonesian</option>
           </select>
-          <select>
+
+          <select aria-label="Select Currency">
             <option>INR ₹</option>
             <option>USD $</option>
             <option>Euro €</option>
@@ -55,31 +61,34 @@ const Footer = () => {
             <option>BRL R$</option>
             <option>ZAR R</option>
           </select>
+
           <p>Talk to a sales rep</p>
-          <p className="font-bold">1.888.799.9666</p>
+          <p className="font-bold">1.800.555.MEET</p>
         </div>
 
         <div className="column">
           <h4>About</h4>
           <ul>
             {[
-              "MeetMaster Blog",
-              "Customers",
-              "Our Team",
-              "Careers",
-              "Integrations",
-              "Partners",
-              "Investors",
-              "Press",
-              "Sustainability & ESG",
-              "MeetMaster Cares",
-              "Media Kit",
-              "How To Videos",
-              "Developer Platform",
-              "MeetMaster Ventures",
-              "MeetMaster Merchandise Store",
+              'MeetMaster Blog',
+              'Customers',
+              'Our Team',
+              'Careers',
+              'Integrations',
+              'Partners',
+              'Investors',
+              'Press',
+              'Sustainability & ESG',
+              'MeetMaster Cares',
+              'Media Kit',
+              'How To Videos',
+              'Developer Platform',
+              'MeetMaster Ventures',
+              'MeetMaster Merchandise Store',
             ].map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace(/ /g, '-')}`}>{item}</a>
+              </li>
             ))}
           </ul>
         </div>
@@ -88,16 +97,18 @@ const Footer = () => {
           <h4>Download</h4>
           <ul>
             {[
-              "MeetMaster Workplace App",
-              "MeetMaster Rooms App",
-              "MeetMaster Rooms Controller",
-              "Browser Extension",
-              "Outlook Plug-in",
-              "iPhone/iPad App",
-              "Android App",
-              "MeetMaster Virtual Backgrounds",
+              'MeetMaster Workplace App',
+              'MeetMaster Rooms App',
+              'MeetMaster Rooms Controller',
+              'Browser Extension',
+              'Outlook Plug-in',
+              'iPhone/iPad App',
+              'Android App',
+              'MeetMaster Virtual Backgrounds',
             ].map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace(/ /g, '-')}`}>{item}</a>
+              </li>
             ))}
           </ul>
         </div>
@@ -106,14 +117,16 @@ const Footer = () => {
           <h4>Sales</h4>
           <ul>
             {[
-              "1.888.799.9666",
-              "Contact Sales",
-              "Plans & Pricing",
-              "Request a Demo",
-              "Webinars and Events",
-              "MeetMaster Experience Center",
+              '1.800.555.MEET',
+              'Contact Sales',
+              'Plans & Pricing',
+              'Request a Demo',
+              'Webinars and Events',
+              'MeetMaster Experience Center',
             ].map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace(/ /g, '-')}`}>{item}</a>
+              </li>
             ))}
           </ul>
         </div>
@@ -122,35 +135,42 @@ const Footer = () => {
           <h4>Support</h4>
           <ul>
             {[
-              "Test MeetMaster",
-              "Account",
-              "Support Center",
-              "Learning Center",
-              "Technical Content Library",
-              "Feedback",
-              "Contact Us",
-              "Accessibility",
-              "Developer Support",
-              "Privacy, Security, Legal Policies, and Modern Slavery Act Transparency Statement",
+              'Test MeetMaster',
+              'Account',
+              'Support Center',
+              'Learning Center',
+              'Technical Content Library',
+              'Feedback',
+              'Contact Us',
+              'Accessibility',
+              'Developer Support',
+              'Privacy & Legal Policies',
             ].map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace(/ /g, '-')}`}>{item}</a>
+              </li>
             ))}
           </ul>
         </div>
       </div>
 
       <div className="bottom">
-        <p>©2025 MeetMaster Communications, Inc. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} MeetMaster Communications, Inc. All
+          rights reserved.
+        </p>
         <div className="social-icons">
           {[
-            "WordPress",
-            "LinkedIn",
-            "X",
-            "YouTube",
-            "Facebook",
-            "Instagram",
+            'WordPress',
+            'LinkedIn',
+            'X',
+            'YouTube',
+            'Facebook',
+            'Instagram',
           ].map((icon) => (
-            <span key={icon}>{icon}</span>
+            <span key={icon} className="social-icon-item">
+              {icon}
+            </span>
           ))}
         </div>
       </div>

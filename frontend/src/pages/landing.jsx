@@ -1,10 +1,12 @@
-import React from "react";
-import "../App.css";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo1.png";
+import React from 'react';
+import '../App.css';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo1.png';
+
 export default function LandingPage() {
   const router = useNavigate();
   const [showContact, setShowContact] = React.useState(false);
+
   return (
     <div className="landingPageContainer">
       <nav>
@@ -12,53 +14,40 @@ export default function LandingPage() {
           <h2>MeetMaster Video Call</h2>
         </div>
         <div className="navlist">
-          <p
-            onClick={() => {
-              router("/aljk23");
-            }}
-          >
+          <Link to="/auth" className="nav-link">
             Join Meeting
-          </p>
-          <p
-            onClick={() => {
-              router("/auth");
-            }}
-          >
+          </Link>
+          <Link to="/auth" className="nav-link">
             Sign Up
-          </p>
-          <div
-            onClick={() => {
-              router("/auth");
-            }}
-            role="button"
-          >
-            <p>Sign In</p>
-          </div>
+          </Link>
+          <Link to="/auth" className="nav-link sign-in-btn">
+            Sign In
+          </Link>
         </div>
       </nav>
 
       <div className="landingMainContainer">
         <div className="heroText">
           <h1>
-            <span style={{ color: "#FF9839" }}>Meet</span> and{" "}
-            <span style={{ color: "#FF9839" }}>Collaborate</span> Anytime
+            <span style={{ color: '#FF9839' }}>Meet</span> and{' '}
+            <span style={{ color: '#FF9839' }}>Collaborate</span> Anytime
           </h1>
           <p>
             Secure, reliable, and easy-to-use video conferencing for work,
             study, and personal connections.
           </p>
           <div className="heroButtons">
-            <Link to={"/auth"} className="ctaButton">
+            <Link to="/auth" className="ctaButton">
               Start Meeting
             </Link>
-            <Link to={"/auth"} className="ctaButton secondary">
+            <Link to="/auth" className="ctaButton secondary">
               Learn More
             </Link>
           </div>
         </div>
 
         <div className="heroImage">
-          <img src={logo} alt="Video Collaboration" />
+          <img src={logo} alt="Video Collaboration Illustration" />
         </div>
       </div>
 
@@ -116,7 +105,17 @@ export default function LandingPage() {
         <div
           className="contactIcon"
           onClick={() => setShowContact(!showContact)}
-        ></div>
+          role="button"
+          aria-label="Toggle Contact Information"
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          📞
+        </div>
 
         {showContact && (
           <div className="contactModal">
@@ -124,14 +123,14 @@ export default function LandingPage() {
             <div className="contactCity">
               <h5>Mumbai Office</h5>
               <p>Email: mumbai@meetmaster.com</p>
-              <p>Phone: +91 00000 00000</p>
-              <p>Address: Mumbai, India</p>
+              <p>Phone: +91 22 5555 0199</p>
+              <p>Address: Nariman Point, Mumbai, India</p>
             </div>
             <div className="contactCity">
               <h5>Kolkata Office</h5>
               <p>Email: kolkata@meetmaster.com</p>
-              <p>Phone: +91 xxxxx xxxxx</p>
-              <p>Address: Kolkata, India</p>
+              <p>Phone: +91 33 4444 0288</p>
+              <p>Address: Salt Lake Sector V, Kolkata, India</p>
             </div>
             <button onClick={() => setShowContact(false)}>Close</button>
           </div>
