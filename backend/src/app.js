@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { createServer } from 'http';
+import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { connectToSocket } from './controllers/socketManeger.js';
 import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
@@ -11,58 +11,51 @@ dotenv.config();
 const app = express();
 const server = createServer(app);
 
-connectToSocket(server);
-
-const url = process.env.MONGO_URL;
-const PORT = process.env.PORT || 8000;
-
 const allowedOrigins = [
-  // 'http://localhost:5173',
+  'http://localhost:5173',
   'https://meetmaster-zoom-frontend.onrender.com',
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow Postman / server-to-server
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin))
         return callback(null, true);
-      }
-
       callback(new Error('Not allowed by CORS'));
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   })
 );
 
 app.use(express.json({ limit: '40kb' }));
-app.use(express.urlencoded({ limit: '40kb', extended: true }));
 app.use('/api/v1/users', userRoutes);
 
-app.get('/home', (req, res) => {
-  return res.json({ hello: 'world' });
+const io = new Server(server, {
+  cors: { origin: allowedOrigins, methods: ['GET', 'POST'] },
 });
 
-const start = async () => {
-  try {
-    await mongoose.connect(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      tls: true,
-      tlsAllowInvalidCertificates: true,
-    });
-    console.log('Connected to MongoDB Atlas');
+io.on('connection', (socket) => {
+  socket.on('join-call', (path) => {
+    socket.join(path);
+    const clients = Array.from(io.sockets.adapter.rooms.get(path) || []);
+    socket.emit('user-joined', socket.id, clients);
+    socket.to(path).emit('user-joined', socket.id, clients);
+  });
 
-    server.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1);
-  }
-};
+  socket.on('signal', (toId, message) => {
+    io.to(toId).emit('signal', socket.id, message);
+  });
 
-start();
+  socket.on('chat-message', (data, sender) => {
+    io.emit('chat-message', data, sender, socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    io.emit('user-left', socket.id);
+  });
+});
+
+const PORT = process.env.PORT || 8000;
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
